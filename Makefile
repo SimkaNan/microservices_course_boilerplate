@@ -14,15 +14,20 @@ get-deps:
 	go get -u google.golang.org/protobuf/cmd/protoc-gen-go
 	go get -u google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
-
-generate:
-	make generate-note-api
-
-generate-note-api:
-	mkdir -p pkg/noteV1
+generate-note-api-auth:
+	mkdir -p auth/pkg/noteV1
 	protoc --proto_path auth/api/noteV1 \
 	--go_out=auth/pkg/noteV1 --go_opt=paths=source_relative \
 	--plugin=protoc-gen-go=bin/protoc-gen-go \
 	--go-grpc_out=auth/pkg/noteV1 --go-grpc_opt=paths=source_relative \
 	--plugin=protoc-gen-go-grpc=bin/protoc-gen-go-grpc \
 	auth/api/noteV1/note.proto
+
+generate-note-api-chat-server:
+	mkdir -p chat-server/pkg/noteV1
+	protoc --proto_path chat-server/api/noteV1 \
+	--go_out=chat-server/pkg/noteV1 --go_opt=paths=source_relative \
+	--plugin=protoc-gen-go=bin/protoc-gen-go \
+	--go-grpc_out=chat-server/pkg/noteV1 --go-grpc_opt=paths=source_relative \
+	--plugin=protoc-gen-go-grpc=bin/protoc-gen-go-grpc \
+	chat-server/api/noteV1/note.proto
