@@ -1,3 +1,5 @@
+# .golangci.pipeline.yaml  (для golangci-lint v1.x)
+
 linters:
   disable-all: true
   enable:
@@ -13,17 +15,36 @@ linters:
 
 linters-settings:
   govet:
-    check-shadowing: true
+    enable:
+      - shadow
+    settings:
+      shadow:
+        strict: false   # поставьте true, если хотите более строгие срабатывания
   dupl:
     threshold: 100
   goconst:
     min-len: 2
     min-occurrences: 2
 
+run:
+  concurrency: 8
+  timeout: 10m
+  issues-exit-code: 1
+  tests: true
+  # при желании зафиксируйте целевую версию Go для анализаторов:
+  # go: '1.23'
+
+output:
+  formats:
+    - format: colored-line-number
+      path: stdout
+  print-issued-lines: true
+  print-linter-name: true
+
 issues:
   exclude-use-default: false
   exclude:
-    - G104 # _ instead of err checks
+    - G104                                   # подавить конкретный ID из gosec
     - exported func .* returns unexported type .*, which can be annoying to use
     - should have a package comment
     - don't use an underscore in package name
@@ -35,17 +56,4 @@ issues:
     - vendor
     - var
     - tmp
-    - .cache
-
-output:
-  formats:
-    - format: colored-line-number
-      path: stdout
-  print-issued-lines: true
-  print-linter-name: true
-
-run:
-  concurrency: 8
-  timeout: 10m
-  issues-exit-code: 1
-  tests: true
+    - \.cache
