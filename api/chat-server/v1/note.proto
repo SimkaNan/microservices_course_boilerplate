@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/olezhek28/microservices_course_boilerplate/gen/chat-server/v1;v1";
 
-service Chat_Server {
+service ChatServer {
   rpc Create (CreateRequest) returns (CreateResponse);
   rpc Delete (DeleteRequest) returns (google.protobuf.Empty);
   rpc SendMessage (SendMessageRequest) returns (google.protobuf.Empty);
