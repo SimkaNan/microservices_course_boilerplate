@@ -13,7 +13,13 @@ type server struct {
 	pb.UnimplementedChatServerServer
 }
 
-func (s *server) Create(ctx context.Context, in *pb.CreateRequest) (*pb.CreateResponse, error) {
+func NewServer() *server {
+	return &server{
+		pb.UnimplementedChatServerServer{},
+	}
+}
+
+func (s *server) Create(_ context.Context, in *pb.CreateRequest) (*pb.CreateResponse, error) {
 	users := in.GetUsernames()
 	if users == nil {
 		err := status.Error(codes.InvalidArgument, "empty fields")
@@ -26,13 +32,13 @@ func (s *server) Create(ctx context.Context, in *pb.CreateRequest) (*pb.CreateRe
 	return &pb.CreateResponse{}, nil
 }
 
-func (s *server) Delete(ctx context.Context, in *pb.DeleteRequest) (*emptypb.Empty, error) {
+func (s *server) Delete(_ context.Context, in *pb.DeleteRequest) (*emptypb.Empty, error) {
 	id := in.GetId()
 	log.Println(id)
 	return &emptypb.Empty{}, nil
 }
 
-func (s *server) SendMessage(ctx context.Context, in *pb.SendMessageRequest) (*emptypb.Empty, error) {
+func (s *server) SendMessage(_ context.Context, in *pb.SendMessageRequest) (*emptypb.Empty, error) {
 	log.Println(in)
 	return &emptypb.Empty{}, nil
 }

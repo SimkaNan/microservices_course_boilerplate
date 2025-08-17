@@ -13,7 +13,13 @@ type server struct {
 	pb.UnimplementedUserAPIServer
 }
 
-func (s *server) Create(ctx context.Context, in *pb.CreateRequest) (*pb.CreateResponse, error) {
+func NewServer() *server {
+	return &server{
+		pb.UnimplementedUserAPIServer{},
+	}
+}
+
+func (s *server) Create(_ context.Context, in *pb.CreateRequest) (*pb.CreateResponse, error) {
 	u := in.GetUser()
 	if u == nil {
 		err := status.Error(codes.InvalidArgument, "empty fields")
@@ -24,7 +30,7 @@ func (s *server) Create(ctx context.Context, in *pb.CreateRequest) (*pb.CreateRe
 	return &pb.CreateResponse{}, nil
 }
 
-func (s *server) Get(ctx context.Context, in *pb.GetRequest) (*pb.GetResponse, error) {
+func (s *server) Get(_ context.Context, in *pb.GetRequest) (*pb.GetResponse, error) {
 	id := in.GetId()
 	if id == 0 {
 		err := status.Error(codes.NotFound, "user not found")
@@ -35,7 +41,7 @@ func (s *server) Get(ctx context.Context, in *pb.GetRequest) (*pb.GetResponse, e
 	return &pb.GetResponse{}, nil
 }
 
-func (s *server) Update(ctx context.Context, in *pb.UpdateRequest) (*emptypb.Empty, error) {
+func (s *server) Update(_ context.Context, in *pb.UpdateRequest) (*emptypb.Empty, error) {
 	u := in.GetUser()
 	if u == nil {
 		err := status.Error(codes.InvalidArgument, "empty fields")
@@ -45,7 +51,7 @@ func (s *server) Update(ctx context.Context, in *pb.UpdateRequest) (*emptypb.Emp
 	return &emptypb.Empty{}, nil
 }
 
-func (s *server) Delete(ctx context.Context, in *pb.DeleteRequest) (*emptypb.Empty, error) {
+func (s *server) Delete(_ context.Context, in *pb.DeleteRequest) (*emptypb.Empty, error) {
 	id := in.GetId()
 	if id == 0 {
 		err := status.Error(codes.NotFound, "user not found")
