@@ -13,6 +13,9 @@ type server struct {
 	pb.UnimplementedUserAPIServer
 }
 
+// NewServer создаёт и возвращает gRPC-обработчик сервиса <название>
+// с зарегистрированными зависимостями/интерсепторами.
+// Используется из cmd/main.go для регистрации в grpc.Server.
 func NewServer() *server {
 	return &server{
 		pb.UnimplementedUserAPIServer{},
