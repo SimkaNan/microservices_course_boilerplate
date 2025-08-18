@@ -2,11 +2,12 @@ package api
 
 import (
 	"context"
+	"log"
+
 	pb "github.com/olezhek28/microservices_course_boilerplate/gen/auth/v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/emptypb"
-	"log"
 )
 
 type server struct {

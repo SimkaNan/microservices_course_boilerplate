@@ -1,10 +1,11 @@
 package main
 
 import (
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 
 	pb "github.com/olezhek28/microservices_course_boilerplate/gen/auth/v1"
 	api "github.com/olezhek28/microservices_course_boilerplate/services/auth/internal/transport/grpc"
