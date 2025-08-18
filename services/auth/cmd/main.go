@@ -1,12 +1,13 @@
 package main
 
 import (
-	pb "github.com/olezhek28/microservices_course_boilerplate/gen/auth/v1"
-	api "github.com/olezhek28/microservices_course_boilerplate/services/auth/internal/transport/grpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
+
+	pb "github.com/olezhek28/microservices_course_boilerplate/gen/auth/v1"
+	api "github.com/olezhek28/microservices_course_boilerplate/services/auth/internal/transport/grpc"
 )
 
 func main() {
